@@ -1,6 +1,5 @@
 /*! minireset.css v0.0.4 | MIT License | github.com/jgthms/minireset.css */
 html,
-body,
 p,
 ol,
 ul,
@@ -85,6 +84,8 @@ th {
 html, body {
   height: 100%;
   width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 #root {

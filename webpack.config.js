@@ -7,7 +7,6 @@ const {
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-  devtool: 'inline-source-map',
   performance: {
     hints: false,
   },
@@ -26,72 +25,19 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].bundle.js',
+    filename: 'js/[name].[hash:7].js',
+    assetModuleFilename: 'images/[name].[hash][ext][query]'
+    // publicPath:''
   },
   optimization: {
     splitChunks: {
-      cacheGroups: {
-        styles: {
-          name: 'css/index',
-          test: /\.css$/,
-          chunks: 'all',
-          enforce: true
-        }
-      }
+      chunks: 'all',
+      minSize: 60000,
+      maxSize: 200000,
     }
   },
   module: {
     rules: [{
-        test: /\.css$/,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              publicPath: '../',
-            }
-          },
-          {
-            loader: 'css-loader'
-          }
-        ]
-      },
-      {
-        test: /\.less$/,
-        use: [ //webpack 5 自定义主题
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              publicPath: '../',
-            }
-          },
-          {
-            loader: 'css-loader'
-          },
-          {
-            loader: 'less-loader',
-            options: {
-              modifyVars: {
-                'primary-color': '#1DA57A',
-              },
-              javascriptEnabled: true // 此项不能忘 
-            }
-          }
-        ]
-      },
-      {
-        test: /\.(png|svg|jpg|gif)$/,
-        use: [{
-          loader: 'url-loader',
-          options: {
-            limit: 10000,
-            name: '[name].[hash:7].[ext]',
-            outputPath: 'images', //输出文件夹
-            // publicPath: 'dist/images' //打包后引用的url前加上 publicpath
-          }
-        }],
-
-      },
-      {
         test: /\.(js|jsx)$/,
         use: [{
           loader: 'babel-loader',
@@ -109,7 +55,53 @@ module.exports = {
           }
         }],
         exclude: /node_modules/
-      }
+      },
+      {
+        test: /\.(png|svg|jpg|gif)$/, // webpack5 已经弃用url-loader，file-loader
+        type: 'asset/resource'
+
+      },
+      {
+        test: /\.css$/,
+        exclude: path.resolve(__dirname, 'node_modules'),
+        use: [{
+            loader: MiniCssExtractPlugin.loader,
+          },
+          // {
+          //   loader: 'style-loader'
+          // },
+          {
+            loader: 'css-loader'
+          },
+        ]
+      },
+      {
+        test: /\.less$/,
+        use: [ //webpack 5 自定义主题
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              esModule: false,
+              // publicPath: './',
+            }
+          },
+          // {
+          //   loader: 'style-loader'
+          // },
+          {
+            loader: 'css-loader'
+          },
+          {
+            loader: 'less-loader',
+            options: {
+              modifyVars: {
+                'primary-color': '#1DA57A',
+              },
+              javascriptEnabled: true // 此项不能忘 
+            }
+          }
+        ]
+      },
     ]
   },
   devServer: {
@@ -117,7 +109,8 @@ module.exports = {
     contentBase: path.join(__dirname, 'public'),
     port: 8088, // 端口号
     inline: true,
-    hot: true
+    hot: true,
+    open: true
   },
   plugins: [
     new CleanWebpackPlugin(),
@@ -127,8 +120,8 @@ module.exports = {
       filename: 'index.html'
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[id].css'
+      filename: 'css/[name].[contenthash].css',
+      // chunkFilename: 'css/[id].css'
     }),
     new webpack.HotModuleReplacementPlugin(),
   ]
