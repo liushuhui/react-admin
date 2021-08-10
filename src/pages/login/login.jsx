@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import './index';
+import './index.less';
 import logo from '@src/assets/images/logo.png';
 import { Form, Input, Button, Checkbox, message } from 'antd';
 import { reqLogin } from '../../api';
