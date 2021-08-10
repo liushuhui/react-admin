@@ -5,7 +5,7 @@ import { reqGetMenu } from '../../api';
 import { message, Menu } from 'antd';
 import { createFromIconfontCN } from '@ant-design/icons';
 import logo from '../../assets/images/logo.png'
-import './index'
+import './index.less'
 const { SubMenu } = Menu;
 const IconFont = createFromIconfontCN({
   scriptUrl: '//at.alicdn.com/t/font_329085_4eg5x6pst8w.js',
