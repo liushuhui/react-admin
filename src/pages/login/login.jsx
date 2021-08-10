@@ -1,18 +1,22 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import './index';
 import logo from '@src/assets/images/logo.png';
 import { Form, Input, Button, Checkbox, message } from 'antd';
 import { reqLogin } from '../../api';
 
+
 const FormItem = Form.Item;
 export default (props) => {
+  const dispatch = useDispatch();
   const onFinish = async (values) => {
     const {username, password} = values;
     const result = await reqLogin(username, password);
     if (result?.code === 0) {
       message.success('登录成功');
       localStorage.setItem('token', result.token);
-      props.history.replace('/admin')
+      dispatch({type: 'SET_USERNAME', payload: result.data});
+      props.history.replace('/');
     } else {
       message.error(result?.message);
     }

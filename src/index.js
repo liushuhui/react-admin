@@ -1,19 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import {persistor} from './redux/store';
+import {PersistGate} from 'redux-persist/lib/integration/react';
 import Login from '@pages/login/login';
 import Admin from '@pages/admin/admin';
 import reportWebVitals from './reportWebVitals';
+import store from './redux/store';
 
 ReactDOM.render(
-  <Router>
+  <Provider store={store}>
+    <PersistGate loading='loading.....' persistor={persistor}>
+     <Router>
       <Switch>
-        <Redirect exact from='/' to='/login'></Redirect>
         <Route path='/login' component={Login}></Route>
-        <Route path='/admin' component={Admin}></Route>
+        <Route path='/' component={Admin}></Route>
       </Switch>
-    </Router>,
+    </Router>
+    </PersistGate>
+  </Provider>,
   document.getElementById('root')
 );
 

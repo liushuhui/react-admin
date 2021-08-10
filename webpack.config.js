@@ -10,13 +10,13 @@ module.exports = {
   performance: {
     hints: false,
   },
-  target: "web",
+  target: 'web',
   resolve: {
     extensions: ['.less', '.js', '.jsx'],
     alias: {
       '@src': path.resolve(__dirname, 'src'),
       '@pages': path.resolve(__dirname, 'src/pages'),
-      '@component': path.resolve(__dirname, 'component'),
+      '@components': path.resolve(__dirname, 'src/components'),
     }
   },
   devtool: 'inline-source-map', // 帮助发现错误
@@ -26,8 +26,8 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'js/[name].[hash:7].js',
-    assetModuleFilename: 'images/[name].[hash][ext][query]'
-    // publicPath:''
+    assetModuleFilename: 'images/[name].[hash][ext][query]',
+    publicPath:'/' //这个是为了解决二级菜单刷新报错的问题，假如不加刷新后会去寻找当前路径的下打包后的css或者js，导致报错，所以要改设置为根路径
   },
   optimization: {
     splitChunks: {

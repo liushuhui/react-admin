@@ -14,7 +14,8 @@ axios.defaults.baseURL = 'http://localhost:7001';
 // 添加请求拦截器
 axios.interceptors.request.use( config => {
   const token = localStorage.getItem('token'); // 存储的token要在请求拦截里获取
-  token ? config.headers.token = token : delete config.headers.token;
+  const weatherUrl = 'https://restapi.amap.com/v3/weather/weatherInfo' //天气api不能带token
+  token && config.url !=  weatherUrl ? config.headers.token = token : delete config.headers.token;
   return config;
 }, error => {
   return Promise.reject(error);
