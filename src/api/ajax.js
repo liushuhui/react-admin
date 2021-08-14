@@ -22,14 +22,14 @@ axios.interceptors.request.use( config => {
 })
 // 添加响应拦截器
 axios.interceptors.response.use(function (response) {
-  console.log('response',response);
+  // console.log('response',response);
   return response.data;
 }, function (error) {
   const {response} = error, 
         status = response.status,
         message = response.data.message;
   
-  console.log('objerror.responseect',response)
+  // console.log('objerror.responseect',response)
   if (status === 401 && message === 'jwt expired') {
     alert('登录过期，请重新登录...');
     window.location.href = '/login';
@@ -48,7 +48,7 @@ export default function ajax(url, params={}, type='GET') {
     }
     // 如果响应成功，调用resolve
     promise.then(response => {
-      console.log('axios response',response)
+      // console.log('axios response',response)
       resolve(response);
     }).catch(error => {
       message.error(`请求出错了：${error.message}`);

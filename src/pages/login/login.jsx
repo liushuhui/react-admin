@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import './index';
+import './index.less';
 import logo from '@src/assets/images/logo.png';
 import { Form, Input, Button, Checkbox, message } from 'antd';
 import { reqLogin } from '../../api';
@@ -10,12 +10,12 @@ const FormItem = Form.Item;
 export default (props) => {
   const dispatch = useDispatch();
   const onFinish = async (values) => {
-    const {username, password} = values;
+    const { username, password } = values;
     const result = await reqLogin(username, password);
     if (result?.code === 0) {
       message.success('登录成功');
       localStorage.setItem('token', result.token);
-      dispatch({type: 'SET_USERNAME', payload: result.data});
+      dispatch({ type: 'SET_USERNAME', payload: result.data });
       props.history.replace('/');
     } else {
       message.error(result?.message);
@@ -40,20 +40,20 @@ export default (props) => {
             name="username"
             rules={[{ required: true, message: '请输入用户名!' }]}
           >
-            <Input placeholder='请输入用户名'/>
+            <Input placeholder='请输入用户名' />
           </FormItem>
 
           <FormItem
             name="password"
             rules={[{ required: true, message: '请输入密码!' }]}
           >
-            <Input.Password placeholder='请输入密码'/>
+            <Input.Password placeholder='请输入密码' />
           </FormItem>
-          <FormItem name="remember" valuePropName="checked" wrapperCol={{ offset: 8, span: 16 }}>
-          <Checkbox>记住登录</Checkbox>
-        </FormItem>
+          {/* <FormItem name="remember" valuePropName="checked" wrapperCol={{ offset: 8, span: 16 }}>
+            <Checkbox>记住登录</Checkbox>
+          </FormItem> */}
 
-          <FormItem wrapperCol={{ offset: 8, span: 16 }}>
+          <FormItem >
             <Button type="primary" htmlType="submit">
               登录
             </Button>

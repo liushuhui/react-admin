@@ -9,4 +9,8 @@ export const getWeather = () => ajax('https://restapi.amap.com/v3/weather/weathe
 export const reqLogin =  (username, password) => ajax('/login', {username, password}, 'POST');
 // 获取菜单
 export const reqGetMenu = () => ajax('/getmenu');
+// 获取当前行菜单数据接口
+export const reqGetMenuDetail = (_id, parentId, level, title, childId) => ajax('/getMenuDetail', {_id, parentId, level,title, childId});
+// 修改菜单提交接口
+export const updateMenu = ({...data}) => ajax('/updateMenu', data, 'POST')
 

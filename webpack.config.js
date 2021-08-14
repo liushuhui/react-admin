@@ -12,7 +12,7 @@ module.exports = {
   },
   target: 'web',
   resolve: {
-    extensions: ['.less', '.js', '.jsx'],
+    extensions: ['.js', '.jsx'],
     alias: {
       '@src': path.resolve(__dirname, 'src'),
       '@pages': path.resolve(__dirname, 'src/pages'),

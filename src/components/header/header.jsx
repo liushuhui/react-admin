@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { formateDate } from '../../utils/dateUtils';
 import { withRouter } from 'react-router-dom';
-import './index';
+import './index.less';
 import { getWeather } from '../../api';
 const Header = (props) => {
   const [currentTime, setCurrentTime] = useState(formateDate(Date.now()));
@@ -48,7 +48,7 @@ const Header = (props) => {
   }, []);
   useEffect(() => {
     getTitle();
-  }, [pathname]);
+  }, [pathname, JSON.stringify(menuList)]);
   return (
     <div className='header'>
       <div className='header-top'>

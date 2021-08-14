@@ -5,6 +5,7 @@ import LeftNav from '@components/left-nav/left-nav';
 
 import Header from '@components/header/header';
 const Home = lazy(() => import('@components/home/home'));
+const MenuEdit = lazy(() => import('@components/home/edit'));
 const Category = lazy(() => import('@pages/goods/category/category'));
 const Product = lazy(() => import('@pages/goods/product/product'));
 const Role = lazy(() => import('@pages/role/role'));
@@ -28,7 +29,8 @@ export default () => {
        <Suspense fallback={<div>Loading</div>}>
          <Switch>
           <Redirect exact from='/' to='/home'/>
-          <Route path='/home' component={Home}/>
+          <Route exact path='/home' component={Home}/>
+          <Route path='/home/edit' component={MenuEdit}/>
           <Route path='/goods/category' component={Category}/>
           <Route path='/goods/product' component={Product}/>
           <Route path='/role' component={Role}/>

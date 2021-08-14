@@ -1,13 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import {persistor} from './redux/store';
 import {PersistGate} from 'redux-persist/lib/integration/react';
+import zhCN from 'antd/es/locale/zh_CN';
+import { ConfigProvider } from 'antd'; // antd默认是英文
 import Login from '@pages/login/login';
 import Admin from '@pages/admin/admin';
 import reportWebVitals from './reportWebVitals';
 import store from './redux/store';
+
 
 ReactDOM.render(
   <Provider store={store}>
@@ -15,7 +18,9 @@ ReactDOM.render(
      <Router>
       <Switch>
         <Route path='/login' component={Login}></Route>
-        <Route path='/' component={Admin}></Route>
+        <ConfigProvider locale={zhCN}> 
+          <Route path='/' component={Admin}></Route>
+        </ConfigProvider>
       </Switch>
     </Router>
     </PersistGate>
