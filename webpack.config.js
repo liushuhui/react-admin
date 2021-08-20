@@ -1,10 +1,8 @@
 const path = require('path');
-const webpack = require('webpack');
 const HtmlPlugin = require('html-webpack-plugin');
-const {
-  CleanWebpackPlugin
-} = require('clean-webpack-plugin');
+
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+console.log('环境变量：', process.env.NODE_ENV)
 
 module.exports = {
   performance: {
@@ -19,7 +17,7 @@ module.exports = {
       '@components': path.resolve(__dirname, 'src/components'),
     }
   },
-  devtool: 'inline-source-map', // 帮助发现错误
+  // devtool: 'inline-source-map', // 帮助发现错误
   entry: {
     index: path.join(__dirname, 'src/index.js')
   },
@@ -64,32 +62,23 @@ module.exports = {
       {
         test: /\.css$/,
         exclude: path.resolve(__dirname, 'node_modules'),
-        use: [{
-            loader: MiniCssExtractPlugin.loader,
-          },
-          // {
-          //   loader: 'style-loader'
-          // },
-          {
-            loader: 'css-loader'
-          },
-        ]
+        use: [ MiniCssExtractPlugin.loader , 'css-loader', 'postcss-loader']
       },
       {
         test: /\.less$/,
         use: [ //webpack 5 自定义主题
           {
-            loader: MiniCssExtractPlugin.loader,
+            loader:  MiniCssExtractPlugin.loader ,
             options: {
               esModule: false,
               // publicPath: './',
             }
           },
-          // {
-          //   loader: 'style-loader'
-          // },
           {
             loader: 'css-loader'
+          },
+          {
+            loader: 'postcss-loader'
           },
           {
             loader: 'less-loader',
@@ -104,16 +93,16 @@ module.exports = {
       },
     ]
   },
-  devServer: {
-    historyApiFallback: true,
-    contentBase: path.join(__dirname, 'public'),
-    port: 8088, // 端口号
-    inline: true,
-    hot: true,
-    open: true
-  },
+  // devServer: {
+  //   historyApiFallback: true,
+  //   contentBase: path.join(__dirname, 'public'),
+  //   port: 8088, // 端口号
+  //   inline: true,
+  //   hot: true,
+  //   open: true
+  // },
   plugins: [
-    new CleanWebpackPlugin(),
+    // new CleanWebpackPlugin(),
     new HtmlPlugin({
       title: 'react-admin',
       template: path.resolve(__dirname, './public/index.html'),
@@ -123,6 +112,6 @@ module.exports = {
       filename: 'css/[name].[contenthash].css',
       // chunkFilename: 'css/[id].css'
     }),
-    new webpack.HotModuleReplacementPlugin(),
+    // new webpack.HotModuleReplacementPlugin(),
   ]
 }

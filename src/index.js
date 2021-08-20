@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import {persistor} from './redux/store';
 import {PersistGate} from 'redux-persist/lib/integration/react';
@@ -10,6 +10,7 @@ import Login from '@pages/login/login';
 import Admin from '@pages/admin/admin';
 import reportWebVitals from './reportWebVitals';
 import store from './redux/store';
+import '../public/css/reset.css'
 
 
 ReactDOM.render(

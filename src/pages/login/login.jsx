@@ -16,7 +16,7 @@ export default (props) => {
       message.success('登录成功');
       localStorage.setItem('token', result.token);
       dispatch({ type: 'SET_USERNAME', payload: result.data });
-      props.history.replace('/');
+      props.history.replace('/home');
     } else {
       message.error(result?.message);
     }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useHistory } from 'react-router-dom';
 import { Form, Input, Button, message, Select} from 'antd';
 import { reqGetMenuDetail, updateMenu } from "../../api";
@@ -9,7 +9,7 @@ const { Option } = Select;
 export default (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const {_id, index, level, parentId, title, childId} = props.location.state;
+  const {_id, index, level, parentId, title, childId} = props.match.params;
   const [form] = Form.useForm();
   const getMenuDetail = async() => {
     const res = await reqGetMenuDetail(_id, parentId, level, title, childId);

@@ -43,7 +43,7 @@ export default () => {
   // 编辑
   const editFn = (val) => {
     const {_id, index, level, parentId, title, childId} = val
-    history.push({pathname: '/home/edit', state: {_id, index, level, parentId, title, childId}});
+    history.push({pathname: `/home/edit/${_id}/${index}/${level}/${parentId}/${title}/${childId}`});
   }
   // 分页配置
   const paginationObj = {

@@ -12,5 +12,14 @@ export const reqGetMenu = () => ajax('/getmenu');
 // 获取当前行菜单数据接口
 export const reqGetMenuDetail = (_id, parentId, level, title, childId) => ajax('/getMenuDetail', {_id, parentId, level,title, childId});
 // 修改菜单提交接口
-export const updateMenu = ({...data}) => ajax('/updateMenu', data, 'POST')
+export const updateMenu = ({...data}) => ajax('/updateMenu', data, 'POST');
+//获取图片
+export const getImg = () => ajax('/getImg');
+// 写文章，提交接口
+export const addArticle = ({...data}) => ajax('/addArticle',data, 'POST');
+// 获取文章
+export const getArticle = () => ajax('/getArticle');
+// 评论
+export const addComment = ({...data}) => ajax('/addComment', data, 'POST')
+
 

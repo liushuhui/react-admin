@@ -1,5 +1,6 @@
 const initState = {
   username: '',
+  img: '',
   menuList: [{
     title: '',
     icon: ''
@@ -20,6 +21,7 @@ export default (state = initState, action) => {
     }
     case 'UPDATE_MENU': {
       let stateData;
+      // debugger
       if (!payload.data.childId) {
         stateData = state.menuList[payload.index - 1];
         stateData.title = payload.data.title;
@@ -38,14 +40,18 @@ export default (state = initState, action) => {
       }
 
       return {
-        ...state,
-        ...stateData
-      }
+        ...state      }
     }
     case 'SET_USERNAME': {
       return {
         ...state,
         username: payload
+      }
+    }
+    case 'SET_IMG': {
+      return {
+        ...state,
+        img: payload
       }
     }
     default:

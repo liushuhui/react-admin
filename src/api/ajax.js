@@ -22,7 +22,6 @@ axios.interceptors.request.use( config => {
 })
 // 添加响应拦截器
 axios.interceptors.response.use(function (response) {
-  // console.log('response',response);
   return response.data;
 }, function (error) {
   const {response} = error, 
@@ -42,9 +41,9 @@ export default function ajax(url, params={}, type='GET') {
   return new Promise(resolve => {
     let promise;
     if (type === 'GET') {
-      promise = axios.get(url, {params}, {withCredentials: true});
+      promise = axios.get(url, {params});
     } else {
-      promise = axios.post(url, params, {withCredentials: true});
+      promise = axios.post(url, params);
     }
     // 如果响应成功，调用resolve
     promise.then(response => {
